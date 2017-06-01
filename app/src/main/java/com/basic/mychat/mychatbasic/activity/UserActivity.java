@@ -6,10 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.basic.mychat.mychatbasic.R;
-import com.basic.mychat.mychatbasic.util.ToastUtil;
-import com.basic.mychat.mychatbasic.util.UserUtil;
+import com.basic.mychat.mychatbasic.util.SharedPreferenceUtil;
 
 
 /**
@@ -52,11 +52,12 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
     private void onClickUserButton() {
         String userName = mUserInputName.getText().toString();
         if (userName == null || userName.length() < 1) {
-            ToastUtil.makeShortToast(this, "Please input your name");
+            Toast.makeText(UserActivity.this,"Please input your name",Toast.LENGTH_SHORT).show();
         }
         else {
-            ToastUtil.makeShortToast(this, "Your name is : " + userName);
-            UserUtil.saveUserName(userName);
+            Toast.makeText(UserActivity.this,"Your name is : ",Toast.LENGTH_SHORT).show();
+            SharedPreferenceUtil.getInstance().putString(SharedPreferenceUtil.USER_NAME, userName);
+
             startActivity(new Intent(this, MainActivity.class));
         }
     }

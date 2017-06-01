@@ -13,7 +13,7 @@ import com.basic.mychat.mychatbasic.R;
 import com.basic.mychat.mychatbasic.adapter.MessageAdapter;
 import com.basic.mychat.mychatbasic.controller.MessageController;
 import com.basic.mychat.mychatbasic.model.Message;
-import com.basic.mychat.mychatbasic.util.UserUtil;
+import com.basic.mychat.mychatbasic.util.SharedPreferenceUtil;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,9 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /* View Component */
     private ListView mListView;
     private MessageAdapter mMessageAdapter;
-    private EditText mInputEditText;
-    private Button mSendButton;
-
+    private EditText etMessage;
+    private Button btnSend;
 
     /* Firebase */
     private ArrayList<Message> mMessageList = new ArrayList<Message>();
@@ -43,12 +42,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        setTitle("Firebase Real-Time Chat");
+
+        setTitle("My Chat basic");
 
         mMessageReference = FirebaseDatabase.getInstance().getReference().child("messages");
 
-        init();
+        mListView = (ListView) findViewById(R.id.main_list);
+
+        etMessage = (EditText) findViewById(R.id.main_input_text);
+        btnSend = (Button) findViewById(R.id.main_button);
+        btnSend.setOnClickListener(this);
     }
 
     @Override
@@ -93,14 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void init() {
-        mListView = (ListView) findViewById(R.id.main_listview);
-
-        mInputEditText = (EditText) findViewById(R.id.main_input_text);
-        mSendButton = (Button) findViewById(R.id.main_button);
-        mSendButton.setOnClickListener(this);
-    }
-
     private void updateUserInterface() {
         mMessageAdapter = new MessageAdapter(this, mMessageList, mMessageKeyList);
         mListView.setAdapter(mMessageAdapter);
@@ -117,12 +114,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void onClickSendButton() {
-        String messageBody = mInputEditText.getText().toString();
-        String userName = UserUtil.loadUserName();
-        Log.d(TAG, "userName is " + userName);
+        String messageBody = etMessage.getText().toString();
+        String userName = SharedPreferenceUtil.getInstance().getString(SharedPreferenceUtil.USER_NAME, null);
+        String messageKey = MessageController.makeMsgFrame();
 
-        String messageKey = MessageController.createMessage();
-
-        MessageController.updateMessage(messageKey, userName, messageBody);
+        MessageController.updateMsg(messageKey, userName, messageBody);
+        etMessage.setText(null);
     }
 }

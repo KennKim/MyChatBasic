@@ -5,11 +5,8 @@ import android.os.Bundle;
 
 import com.basic.mychat.mychatbasic.R;
 import com.basic.mychat.mychatbasic.util.SharedPreferenceUtil;
-import com.basic.mychat.mychatbasic.util.UserUtil;
 
 public class StartActivity extends BaseActivity {
-    private final String TAG = StartActivity.class.getSimpleName();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,13 +14,9 @@ public class StartActivity extends BaseActivity {
         setContentView(R.layout.activity_start);
 
         SharedPreferenceUtil.getInstance().init(getApplicationContext());
-
-        String userName = UserUtil.loadUserName();
-        switchActivity(userName);
-    }
+        String userName = SharedPreferenceUtil.getInstance().getString(SharedPreferenceUtil.USER_NAME, null);
 
 
-    private void switchActivity(String userName) {
         if (userName == null || userName.length() < 1) {
             startActivity(new Intent(StartActivity.this, UserActivity.class));
             finish();
@@ -31,6 +24,7 @@ public class StartActivity extends BaseActivity {
             startActivity(new Intent(StartActivity.this, MainActivity.class));
             finish();
         }
+
     }
 
 

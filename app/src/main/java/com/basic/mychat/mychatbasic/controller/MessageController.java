@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class MessageController {
 
-    public static String createMessage() {
+    public static String makeMsgFrame() {
         String messageKey = FirebaseDatabase.getInstance().getReference().child("messages").push().getKey();
 
         Message message = new Message();
@@ -24,7 +24,7 @@ public class MessageController {
         return messageKey;
     }
 
-    public static void editMessage(String messageKey, Message message) {
+    public static void editMsg(String messageKey, Message message) {
         Map<String, Object> messageValue = message.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(messageKey, messageValue);
@@ -32,11 +32,11 @@ public class MessageController {
         FirebaseDatabase.getInstance().getReference().child("messages").updateChildren(childUpdates);
     }
 
-    public static void updateMessage(String messageKey, String userName, String messageBody) {
+    public static void updateMsg(String messageKey, String userName, String messageBody) {
         Message message = new Message();
         message.userName = userName;
         message.message = messageBody;
 
-        editMessage(messageKey, message);
+        editMsg(messageKey, message);
     }
 }

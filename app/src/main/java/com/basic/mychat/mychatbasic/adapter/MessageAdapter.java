@@ -44,15 +44,15 @@ public class MessageAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.listview_item_message, parent, false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.itemview_chat, parent, false);
             view = convertView;
         }
-        final Message message = mMessageList.get(position);
+        final Message msg = mMessageList.get(position);
         TextView userName = (TextView) view.findViewById(R.id.message_user_name);
-        userName.setText(message.userName + "'s ");
+        userName.setText(msg.userName);
 
-        TextView mesageBody = (TextView) view.findViewById(R.id.message_body);
-        mesageBody.setText(message.message);
+        TextView msgBody = (TextView) view.findViewById(R.id.message_body);
+        msgBody.setText(msg.message);
 
         return view;
     }

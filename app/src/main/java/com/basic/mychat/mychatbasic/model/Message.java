@@ -2,11 +2,12 @@ package com.basic.mychat.mychatbasic.model;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
+@IgnoreExtraProperties
 public class Message {
     public String userName;
     public String message;
@@ -14,7 +15,6 @@ public class Message {
 
 
     public Message() {
-        this.isDeleted = false;
     }
 
     public Message(String userName, String message) {
@@ -24,7 +24,7 @@ public class Message {
     }
 
     @Exclude
-    public Map<String, Object> toMap() {
+    public Map<String, Object> getMsg() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("userName", userName);
         result.put("message", message);
@@ -33,7 +33,7 @@ public class Message {
     }
 
     @Exclude
-    public static Message parseSnapshot(DataSnapshot snapshot) {
+    public static Message getMsgFromSnap(DataSnapshot snapshot) {
         Message msg = new Message();
         msg.userName = (String) snapshot.child("userName").getValue();
         msg.message = (String) snapshot.child("message").getValue();

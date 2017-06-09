@@ -17,11 +17,11 @@ public class StartActivity extends BaseActivity {
         String userName = SharedPreferenceUtil.getInstance().getString(SharedPreferenceUtil.USER_NAME, null);
 
 
-        if (userName == null || userName.length() < 1) {
-            startActivity(new Intent(StartActivity.this, UserActivity.class));
+        if (userName == null || userName.isEmpty()) {
+            startActivity(new Intent(StartActivity.this, UserCreateActivity.class));
             finish();
         } else {
-            startActivity(new Intent(StartActivity.this, MainActivity.class));
+            startActivity(new Intent(StartActivity.this, UserListActivity.class));
             finish();
         }
 

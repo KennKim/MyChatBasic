@@ -2,21 +2,26 @@ package com.basic.mychat.mychatbasic.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 
 
 public class SharedPreferenceUtil {
-    public static final String DEFAULT_SETTING = "MY CHAT BASIC";
+    public static final String DEFAULT_SETTING = "default_setting";
     public static final String USER_NAME = "user_name";
+    public static final String DISPLAY_NAME = "user_name";
+    public static final String USER_EMAIL = "user_name";
+    public static final Uri USER_PHOTO=null;
 
     private static volatile SharedPreferenceUtil instance = null;
 
     private Context context;
     private SharedPreferences sharedPref;
 
-    private SharedPreferenceUtil() {}
+    private SharedPreferenceUtil() {
+    }
 
-            public static SharedPreferenceUtil getInstance() {
-                if(instance == null) {
+    public static SharedPreferenceUtil getInstance() {
+        if (instance == null) {
             synchronized (SharedPreferenceUtil.class) {
                 instance = new SharedPreferenceUtil();
             }
@@ -24,14 +29,13 @@ public class SharedPreferenceUtil {
         return instance;
     }
 
-
     public void init(Context _context) {
         context = _context;
         sharedPref = context.getSharedPreferences(DEFAULT_SETTING, context.MODE_PRIVATE);
     }
 
     public void putString(String _key, String _value) {
-        if(sharedPref == null){
+        if (sharedPref == null) {
             return;
         }
         SharedPreferences.Editor e = sharedPref.edit();
@@ -40,14 +44,14 @@ public class SharedPreferenceUtil {
     }
 
     public String getString(String _key, String _value) {
-        if(sharedPref == null){
+        if (sharedPref == null) {
             return null;
         }
         return sharedPref.getString(_key, _value);
     }
 
     public void putBoolean(String _key, boolean _value) {
-        if(sharedPref == null) {
+        if (sharedPref == null) {
             return;
         }
         SharedPreferences.Editor e = sharedPref.edit();
@@ -56,14 +60,14 @@ public class SharedPreferenceUtil {
     }
 
     public boolean getBoolean(String _key, boolean _value) {
-        if(sharedPref == null) {
+        if (sharedPref == null) {
             return false;
         }
         return sharedPref.getBoolean(_key, _value);
     }
 
     public void putInt(String _key, int _value) {
-        if(sharedPref == null) {
+        if (sharedPref == null) {
             return;
         }
         SharedPreferences.Editor e = sharedPref.edit();
@@ -72,14 +76,14 @@ public class SharedPreferenceUtil {
     }
 
     public int getInt(String _key, int _value) {
-        if(sharedPref == null) {
+        if (sharedPref == null) {
             return -1;
         }
         return sharedPref.getInt(_key, _value);
     }
 
     public void putLong(String _key, long _value) {
-        if(sharedPref == null) {
+        if (sharedPref == null) {
             return;
         }
         SharedPreferences.Editor e = sharedPref.edit();
@@ -88,7 +92,7 @@ public class SharedPreferenceUtil {
     }
 
     public long getLong(String _key, long _value) {
-        if(sharedPref == null) {
+        if (sharedPref == null) {
             return -1;
         }
         return sharedPref.getLong(_key, _value);

@@ -11,21 +11,18 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/main_list"
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="#00ffffff" />
-
+            android:id="@+id/recyclerView"
+            android:layout_height="match_parent" />
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:focusable="true"
         android:elevation="10dp"
+        android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="horizontal">
 
@@ -35,13 +32,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:padding="10dp"
-            android:textSize="@dimen/font_size_basic"
             android:ems="10"
             android:gravity="start"
             android:hint="@string/write_message"
             android:inputType="none"
-            android:maxLines="4" />
+            android:maxLines="4"
+            android:padding="10dp"
+            android:textSize="@dimen/font_size_basic" />
 
         <Button
             android:id="@+id/main_button"

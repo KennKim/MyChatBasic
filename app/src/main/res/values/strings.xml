@@ -2,6 +2,6 @@
     <string name="app_name">MyChatBasic</string>
 
 
-
-    <string name="write_message">메시지를 적어주</string>
+    <string name="write_message">메시지를 적어주..</string>
+    <string name="title_user_list">현재 채팅중인 회원</string>
 </resources>

@@ -33,10 +33,9 @@ import java.util.ArrayList;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
-
     private final String TAG = ChatRoomActivity.class.getSimpleName();
 
-    private final static String CHILD_MESSAGE = "messages";
+    private final static String CHILD_MESSAGE = "messages12";
     private final static int REQUEST_IMAGE = 1002;
     private static final String LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif";
     private static String texting = "";

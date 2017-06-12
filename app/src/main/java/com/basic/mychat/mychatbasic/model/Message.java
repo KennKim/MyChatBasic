@@ -11,15 +11,19 @@ import java.util.Map;
 public class Message {
     public String userName;
     public String message;
-    public Boolean isDeleted;
+    private String faceUrl;
+    private String imageUrl;
+    public Boolean isDeleted=false;
 
 
     public Message() {
     }
 
-    public Message(String userName, String message) {
+    public Message(String userName, String message, String faceUrl, String imageUrl) {
         this.userName = userName;
         this.message = message;
+        if(faceUrl!=null) this.message = faceUrl;
+        if(imageUrl!=null) this.message = imageUrl;
         this.isDeleted = false;
     }
 
